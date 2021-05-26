@@ -16,3 +16,8 @@
 
 - https://codetorial.net/pillow/index.html
 - https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes
+- https://stackoverflow.com/questions/58236138/pil-and-python-static-typing
+
+## Grayscale
+
+- https://en.wikipedia.org/wiki/Grayscale
