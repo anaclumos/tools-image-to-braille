@@ -42,7 +42,7 @@ for file in sys.argv[1:]:
     im = Image.open(normalized_path)
 
     # (image, weight, height). 0 as height means auto
-    resized_image = resize(im, 300, 0)
+    resized_image = resize(im, 400, 0)
 
     px = resized_image.load()
     answer = ""
