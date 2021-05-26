@@ -43,22 +43,32 @@ for file in sys.argv[1:]:
 
     # (image, weight, height). 0 as height means auto
     resized_image = resize(im, 300, 0)
-    resized_image.save(dirname + "/new.png")
 
     px = resized_image.load()
     answer = ""
     for h in range(0, resized_image.height, braille_config.height):
         for w in range(0, resized_image.width, braille_config.width):
             braille = [False] * braille_config.width * braille_config.height
+            braille_r = 0
+            braille_g = 0
+            braille_b = 0
             for local_w in range(braille_config.width):
                 for local_h in range(braille_config.height):
                     r, g, b, *rest = px[w + local_w, h + local_h]  # ignore alpha
+                    braille_r += r
+                    braille_g += g
+                    braille_b += b
                     if grayscale(r, g, b) > hex_threshold:
                         braille[local_w * braille_config.height + local_h] = True
             output = braille_config.base
             for idx, val in enumerate(braille):
                 if val:
                     output += 2 ** idx
-            answer += chr(output)
+            braille_r //= braille_config.width * braille_config.height
+            braille_g //= braille_config.width * braille_config.height
+            braille_b //= braille_config.width * braille_config.height
+            answer += "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(
+                braille_r, braille_g, braille_b, chr(output)
+            )
         answer += "\n"
     print(answer)
