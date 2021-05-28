@@ -42,7 +42,7 @@ for file in sys.argv[1:]:
     im = Image.open(normalized_path)
 
     # (image, weight, height). 0 as height means auto
-    resized_image = resize(im, 400, 0)
+    resized_image = resize(im, 450, 300)
 
     px = resized_image.load()
     answer = ""
@@ -67,7 +67,7 @@ for file in sys.argv[1:]:
             braille_r //= braille_config.width * braille_config.height
             braille_g //= braille_config.width * braille_config.height
             braille_b //= braille_config.width * braille_config.height
-            answer += "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(
+            answer += "\033[38;2;{};{};{}m{}\033[38;2;255;255;255m".format(
                 braille_r, braille_g, braille_b, chr(output)
             )
         answer += "\n"
